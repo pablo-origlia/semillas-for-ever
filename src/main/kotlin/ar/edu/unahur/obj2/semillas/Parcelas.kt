@@ -3,7 +3,7 @@ package ar.edu.unahur.obj2.semillas
 //import ar.edu.unahur.obj2.semillas
 
 abstract class Parcela(val ancho: Double, val largo: Double, val horasDeSolPorDia: Int) {
-  val plantacion = mutableListOf<Planta>()
+  var plantacion = mutableListOf<Planta>()
 
   fun superficie() = ancho * largo
 

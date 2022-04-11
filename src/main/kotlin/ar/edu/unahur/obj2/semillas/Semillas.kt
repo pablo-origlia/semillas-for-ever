@@ -66,7 +66,7 @@ class SojaTransgenica(altura: Double, anioObtencionSemilla: Int): Soja(altura,an
 
   override fun daNuevasSemillas() = false
 
-  override fun resultaIdeal(parcela: Parcela) = parcela.cantidadDePlantas() == 1
+  override fun resultaIdeal(parcela: Parcela) = parcela.cantidadMaximaDePlantas() == 1
 }
 
 class Peperina(altura: Double, anioObtencionSemilla: Int): Menta(altura,anioObtencionSemilla) {
