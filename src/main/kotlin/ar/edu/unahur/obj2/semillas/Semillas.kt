@@ -8,14 +8,7 @@ abstract class Planta(var altura: Double, val anioObtencionSemilla: Int) {
 
   open fun daNuevasSemillas(): Boolean = esFuerte() or condicionAlternativa()
 
-  //EXISTE FORMA DE DECLARAR LA FUNCIÓN SIN DEFINIR EL CUERPO,
-  // COMO SE HACE EN WOLLOK?
-
-  //open fun condicionAlternativa(): Boolean = true
-
   abstract fun condicionAlternativa(): Boolean
-
-  //open fun espacio(): Double = 0.0
 
   abstract fun espacio(): Double
 
@@ -26,8 +19,6 @@ abstract class Planta(var altura: Double, val anioObtencionSemilla: Int) {
 }
 
 open class Menta(altura: Double, anioObtencionSemilla: Int): Planta(altura,anioObtencionSemilla) {
-
-  override fun horasDeSolQueTolera() = 6
 
   override fun condicionAlternativa() =  altura > 0.4
 
@@ -61,11 +52,9 @@ open class Soja(altura: Double, anioObtencionSemilla: Int): Planta(altura,anioOb
 
 class Quinoa(altura: Double, anioObtencionSemilla: Int): Planta(altura,anioObtencionSemilla) {
 
-  val horasDeToleranciaAlSol = 0
+  override fun horasDeSolQueTolera() = if (espacio() < 0.3) 10 else super.horasDeSolQueTolera()
 
-  override fun horasDeSolQueTolera() = horasDeToleranciaAlSol
-
-  override fun condicionAlternativa() = anioObtencionSemilla < 2005
+  override fun condicionAlternativa() = (anioObtencionSemilla>=2001) and (anioObtencionSemilla<=2008)
 
   override fun espacio() = 0.5
 
@@ -77,12 +66,11 @@ class SojaTransgenica(altura: Double, anioObtencionSemilla: Int): Soja(altura,an
 
   override fun daNuevasSemillas() = false
 
-  override fun resultaIdeal(parcela: Parcela) = parcela.cantidadMaximaDePlantas() == 1
-
+  override fun resultaIdeal(parcela: Parcela) = parcela.cantidadDePlantas() == 1
 }
 
 class Peperina(altura: Double, anioObtencionSemilla: Int): Menta(altura,anioObtencionSemilla) {
 
-  /*override fun espacio() = super() * 2*/
+  override fun espacio() = super.espacio() * 2
 
 }

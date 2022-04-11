@@ -21,7 +21,7 @@ abstract class Parcela(val ancho: Double, val largo: Double, val horasDeSolPorDi
 
   fun cantidadDePlantas() = plantacion.size
 
-  fun hayLugar() = (this.cantidadDePlantas() + 1) <= cantidadMaximaDePlantas()
+  fun hayLugar() = (cantidadDePlantas() + 1) <= cantidadMaximaDePlantas()
 
   fun excesoDeSol(planta: Planta) = horasDeSolPorDia >= (planta.horasDeSolQueTolera() + 2)
 
