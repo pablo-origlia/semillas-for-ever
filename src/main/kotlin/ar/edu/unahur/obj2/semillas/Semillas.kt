@@ -1,42 +1,49 @@
 package ar.edu.unahur.obj2.semillas
 
-class Planta(var altura: Double, val anioObtencionSemilla: Int) {
+abstract class Planta(var altura: Double, val anioObtencionSemilla: Int) {
+
   open fun horasDeSolQueTolera() = 7
 
   fun esFuerte() = horasDeSolQueTolera() > 9
 
-  fun daNuevaSemillas() = esFuerte() or condicionAlternativa()
+  open fun daNuevasSemillas(): Boolean = esFuerte() or condicionAlternativa()
 
-  open fun condicionAlternativa()
+  //EXISTE FORMA DE DECLARAR LA FUNCIÓN SIN DEFINIR EL CUERPO,
+  // COMO SE HACE EN WOLLOK?
 
-  open fun espacio()
+  //open fun condicionAlternativa(): Boolean = true
 
-/*
-  fun resultaIdeal(parcela)
+  abstract fun condicionAlternativa(): Boolean
 
-  fun seAsociaBien(parcela) = parcela.puedeAsociarse(this)
-*/
+  //open fun espacio(): Double = 0.0
+
+  abstract fun espacio(): Double
+
+  abstract fun resultaIdeal(parcela: Parcela): Boolean
+
+  fun seAsociaBien(parcela: Parcela): Boolean = parcela.puedeAsociarse(this)
+
 }
 
-class Menta(var altura: Double, val anioObtencionSemilla: Int): Planta {
+open class Menta(altura: Double, anioObtencionSemilla: Int): Planta(altura,anioObtencionSemilla) {
 
   override fun horasDeSolQueTolera() = 6
 
-  override fun condicionAlternativa() = altura() > 0.4
+  override fun condicionAlternativa() =  altura > 0.4
 
-  override fun espacio() = altura() + 1
-/* 
-  override fun resultaIdeal(parcela) = parcela.superficie() > 6
-*/
+  override fun espacio() = altura + 1
+
+  override fun resultaIdeal(parcela: Parcela) = parcela.superficie() > 6
+
 }
 
-class Soja(var altura: Double, val anioObtencionSemilla: Int): Planta {
+open class Soja(altura: Double, anioObtencionSemilla: Int): Planta(altura,anioObtencionSemilla) {
 
-  override fun horasDeSolQueTolera() {
-    var tolerancia
-    if (altura() < 0.5) {
+  override fun horasDeSolQueTolera(): Int {
+    var tolerancia: Int
+    if (altura < 0.5) {
       tolerancia = 6
-    } else if (altura() in 0.5..1) {
+    } else if (altura in 0.5..1.0) {
       tolerancia = 8
     } else {
       tolerancia = 12
@@ -44,38 +51,38 @@ class Soja(var altura: Double, val anioObtencionSemilla: Int): Planta {
     return tolerancia
   }
 
-  override fun condicionAlternativa() = (anioObtencionSemilla() > 2007) and (altura() in 0.75..0.9)
+  override fun condicionAlternativa() = (anioObtencionSemilla > 2007) and (altura in 0.75..0.9)
 
-  override fun espacio() = altura() / 2
-/*
-  override fun resultaIdeal(parcela) = parcela.horasDeSolPorDia() == horasDeSolQueTolera()
- */
+  override fun espacio() = altura / 2
+
+  override fun resultaIdeal(parcela: Parcela) = parcela.horasDeSolPorDia == horasDeSolQueTolera()
+
 }
 
-class Quinoa(var altura: Double, val anioObtencionSemilla: Int): Planta {
+class Quinoa(altura: Double, anioObtencionSemilla: Int): Planta(altura,anioObtencionSemilla) {
 
-  const horasDeToleranciaAlSol = 0
+  val horasDeToleranciaAlSol = 0
 
   override fun horasDeSolQueTolera() = horasDeToleranciaAlSol
 
-  override fun condicionAlternativa() = self.anioObtencionSemilla() < 2005
+  override fun condicionAlternativa() = anioObtencionSemilla < 2005
 
   override fun espacio() = 0.5
 
-  override fun resultaIdeal(parcela) = parcela.plantacion().all({ p => p.altura() <= 1.5 })
+  override fun resultaIdeal(parcela: Parcela) = parcela.plantacion.all{ p -> p.altura <= 1.5 }
 
 }
 
-class SojaTransgenica(var altura: Double, val anioObtencionSemilla: Int): Soja {
+class SojaTransgenica(altura: Double, anioObtencionSemilla: Int): Soja(altura,anioObtencionSemilla) {
 
-  override fun daNuevaSemillas() = false
+  override fun daNuevasSemillas() = false
 
-  override fun resultaIdeal(parcela) = parcela.cantidadMaximaDePlantas() == 1
+  override fun resultaIdeal(parcela: Parcela) = parcela.cantidadMaximaDePlantas() == 1
 
 }
 
-class Peperina(var altura: Double, val anioObtencionSemilla: Int): Menta {
+class Peperina(altura: Double, anioObtencionSemilla: Int): Menta(altura,anioObtencionSemilla) {
 
-  override fun espacio() = super() * 2
+  /*override fun espacio() = super() * 2*/
 
 }
