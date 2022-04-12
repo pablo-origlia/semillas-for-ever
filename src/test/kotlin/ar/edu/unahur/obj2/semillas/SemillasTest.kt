@@ -17,13 +17,14 @@ class SemillasTest : DescribeSpec ({
         val sojaAlta = Soja(1.8, 2009)
         val quinoaChica = Quinoa(0.2,2010)
         val quinoaGrande = Quinoa(0.9,2006)
+        val parcela = ParcelaIndustrial(1.0,3.0,6)
 
-        it("Probamos los atributos altura y anioSemilla") {
+        it("Comprobación de atributos altura y anioSemilla") {
             menta.altura.shouldBe(1.0)
             menta.anioObtencionSemilla.shouldBe(2021)
         }
 
-        it("Verificar si da nuevas semillas") {
+        it("Da nuevas semillas") {
             menta.daNuevasSemillas().shouldBeTrue()
             mentita.daNuevasSemillas().shouldBeFalse()
             soja.daNuevasSemillas().shouldBeFalse()
@@ -32,7 +33,7 @@ class SemillasTest : DescribeSpec ({
             quinoaGrande.daNuevasSemillas().shouldBeTrue()
         }
 
-        it("es fuerte") {
+        it("Es fuerte") {
             menta.esFuerte().shouldBeFalse()
             soja.esFuerte().shouldBeFalse()
         }
@@ -50,12 +51,18 @@ class SemillasTest : DescribeSpec ({
             sojaAlta.horasDeSolQueTolera().shouldBe(12)
         }
 
-        it("verifico la suma de superficie ocupada por varias plantas") {
+        it("Superficie que ocupan varias plantas") {
             val superficie = mutableListOf(
                 soja.espacio(),
                 menta.espacio()
             ).sum()
             superficie.shouldBe(2.3)
         }
+
+        it("Parcela resulta ideal para planta ") {
+            menta.resultaIdeal(parcela).shouldBeFalse()
+            sojaEnana.resultaIdeal(parcela).shouldBeTrue()
+        }
+
     }
 })
