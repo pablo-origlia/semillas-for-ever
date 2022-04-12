@@ -13,11 +13,13 @@ class ParcelasTest : DescribeSpec ({
     describe("Parcela") {
         val plantaSoja1 = Soja(anioObtencionSemilla = 2009, altura = 1.5)
         val plantaSoja2 = Soja(anioObtencionSemilla = 2009, altura = 1.1)
-        val plantaSoja3 = Soja(anioObtencionSemilla = 2009, altura = 1.2)
-        val parcela = ParcelaEcologica(ancho = 20.0, largo = 1.0, horasDeSolPorDia = 8)
+        val plantaSoja3 = Soja(anioObtencionSemilla = 2021, altura = 1.2)
+        val plantaSoja4 = Soja(anioObtencionSemilla = 2010, altura = 1.8)
+        val parcela = ParcelaEcologica(ancho = 20.0, largo = 1.0, horasDeSolPorDia = 10)
         parcela.plantar(plantaSoja1)
         parcela.plantar(plantaSoja2)
         parcela.plantar(plantaSoja3)
+        parcela.plantar(plantaSoja4)
 
         it("Creación de la parcela") {
             parcela.ancho.shouldBe(20.0)
@@ -33,7 +35,7 @@ class ParcelasTest : DescribeSpec ({
         }
 
         it("Cantidad de Plantas") {
-            parcela.cantidadDePlantas().shouldBe(3)
+            parcela.cantidadDePlantas().shouldBe(4)
         }
 
         it("Tiene complicaciones") {

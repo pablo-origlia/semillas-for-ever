@@ -1,18 +1,18 @@
 package ar.edu.unahur.obj2.semillas
 
-//import ar.edu.unahur.obj2.semillas
+import kotlin.math.roundToInt
 
 abstract class Parcela(val ancho: Double, val largo: Double, val horasDeSolPorDia: Int) {
-  var plantacion = mutableListOf<Planta>()
+  val plantacion = mutableListOf<Planta>()
 
   fun superficie() = ancho * largo
 
   fun cantidadMaximaDePlantas(): Int{
-    var cantidad: Int
+    val cantidad: Int
     if (ancho > largo) {
-       cantidad = (superficie() / 5).toInt()
+       cantidad = (superficie() / 5.0).toInt()  // El .toInt() es para strings
     } else {
-       cantidad = ((superficie() / 3) + largo).toInt()
+       cantidad = ((superficie() / 3.0) + largo).toInt()
     }
     return cantidad
   }

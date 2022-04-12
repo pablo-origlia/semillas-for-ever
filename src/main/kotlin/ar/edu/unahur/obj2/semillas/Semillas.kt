@@ -18,20 +18,20 @@ abstract class Planta(var altura: Double, val anioObtencionSemilla: Int) {
 
 }
 
-open class Menta(altura: Double, anioObtencionSemilla: Int): Planta(altura,anioObtencionSemilla) {
+open class Menta(altura: Double, anioObtencionSemilla: Int): Planta(altura, anioObtencionSemilla) {
 
   override fun condicionAlternativa() =  altura > 0.4
 
   override fun espacio() = altura + 1
 
-  override fun resultaIdeal(parcela: Parcela) = parcela.superficie() > 6
+  override fun resultaIdeal(parcela: Parcela) = parcela.superficie() > 6.0
 
 }
 
-open class Soja(altura: Double, anioObtencionSemilla: Int): Planta(altura,anioObtencionSemilla) {
+open class Soja(altura: Double, anioObtencionSemilla: Int): Planta(altura, anioObtencionSemilla) {
 
   override fun horasDeSolQueTolera(): Int {
-    var tolerancia: Int
+    val tolerancia: Int
     if (altura < 0.5) {
       tolerancia = 6
     } else if (altura in 0.5..1.0) {
@@ -44,19 +44,19 @@ open class Soja(altura: Double, anioObtencionSemilla: Int): Planta(altura,anioOb
 
   override fun condicionAlternativa() = (anioObtencionSemilla > 2007) and (altura in 0.75..0.9)
 
-  override fun espacio() = altura / 2
+  override fun espacio() = altura / 2.0
 
   override fun resultaIdeal(parcela: Parcela) = parcela.horasDeSolPorDia == horasDeSolQueTolera()
 
 }
 
-class Quinoa(altura: Double, anioObtencionSemilla: Int): Planta(altura,anioObtencionSemilla) {
+class Quinoa(val espacio: Double, anioObtencionSemilla: Int): Planta(altura = 0.1, anioObtencionSemilla) {
 
   override fun horasDeSolQueTolera() = if (espacio() < 0.3) 10 else super.horasDeSolQueTolera()
 
-  override fun condicionAlternativa() = (anioObtencionSemilla>=2001) and (anioObtencionSemilla<=2008)
+  override fun condicionAlternativa() = anioObtencionSemilla in 2001..2008
 
-  override fun espacio() = 0.5
+  override fun espacio() = espacio
 
   override fun resultaIdeal(parcela: Parcela) = parcela.plantacion.all{ p -> p.altura <= 1.5 }
 
@@ -71,6 +71,6 @@ class SojaTransgenica(altura: Double, anioObtencionSemilla: Int): Soja(altura,an
 
 class Peperina(altura: Double, anioObtencionSemilla: Int): Menta(altura,anioObtencionSemilla) {
 
-  override fun espacio() = super.espacio() * 2
+  override fun espacio() = super.espacio() * 2.0
 
 }
