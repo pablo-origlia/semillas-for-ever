@@ -10,7 +10,7 @@ abstract class Parcela(val ancho: Double, val largo: Double, val horasDeSolPorDi
   fun cantidadMaximaDePlantas(): Int{
     val cantidad: Int
     if (ancho > largo) {
-       cantidad = (superficie() / 5.0).toInt()  // El .toInt() es para strings
+       cantidad = (superficie() / 5.0).toInt()
     } else {
        cantidad = ((superficie() / 3.0) + largo).toInt()
     }
