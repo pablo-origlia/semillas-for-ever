@@ -10,7 +10,7 @@ import io.kotest.matchers.shouldBe
 class ParcelasTest : DescribeSpec ({
     // hay una clase Parcela que tiene por atributos
     // ancho, largo,horasDeSolPorDia
-    describe("Creación de Parcelas") {
+    describe("Test de Parcelas") {
         val plantaSoja1 = Soja(anioObtencionSemilla = 2009, altura = 1.5)
         val plantaSoja2 = Soja(anioObtencionSemilla = 2009, altura = 1.1)
         val plantaSoja3 = Soja(anioObtencionSemilla = 2021, altura = 1.2)

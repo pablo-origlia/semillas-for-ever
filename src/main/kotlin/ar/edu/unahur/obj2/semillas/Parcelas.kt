@@ -37,6 +37,8 @@ abstract class Parcela(val ancho: Double, val largo: Double, val horasDeSolPorDi
 
   fun cantidadDePlantasBienAsociadas() = plantacion.count{ p -> puedeAsociarse(p)}
 
+  fun porcentajeDePlantasBienAsociadas() = cantidadDePlantasBienAsociadas().toDouble()/cantidadDePlantas().toDouble()
+
 }
 
 class ParcelaEcologica(ancho: Double, largo: Double, horasDeSolPorDia: Int): Parcela(ancho, largo, horasDeSolPorDia){

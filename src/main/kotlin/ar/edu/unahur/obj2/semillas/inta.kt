@@ -1,6 +1,7 @@
 package ar.edu.unahur.obj2.semillas
 
 import java.nio.DoubleBuffer
+import kotlin.math.max
 
 object inta {
 
@@ -13,13 +14,29 @@ object inta {
   fun cantidadDeParcelas() = parcelas.size
 
   fun promedioPlantasPorParcela(): Double{
-    var promedio = 0.00
     if (cantidadDeParcelas() != 0) {
-      promedio = totalDePlantas().toDouble()/cantidadDeParcelas().toDouble()
+      return totalDePlantas().toDouble()/cantidadDeParcelas().toDouble()
     }
-    return promedio
+    else{
+      error("No hay parcelas asociadas al INTA")
+    }
   }
 
-  //fun parcelaMasAutosustentable() = parcelas.filter{ p -> p.cantidadDePlantas() > 4 }.max{ p -> p.cantidadDePlantasBienAsociadas()/ p.cantidadDePlantas() }
+  fun parcelaMasAutosustentable(): Parcela {
+    if (cantidadDeParcelas() !=0){
+      val parcelasMayorA4Plantas = parcelas.filter{ p -> p.cantidadDePlantas() > 4 }
+      if (parcelasMayorA4Plantas.isNotEmpty()){
+        val mayorPorcentajeBA= parcelas.maxOf{ p -> p.porcentajeDePlantasBienAsociadas()}
+        return parcelasMayorA4Plantas.filter{ p->p.porcentajeDePlantasBienAsociadas() == mayorPorcentajeBA }.first()
+        //return parcelasMayorA4Plantas.maxOf{p -> p.cantidadDePlantasBienAsociadas().toDouble()/ p.cantidadDePlantas().toDouble()}
+      }
+      else{
+        error("No hay parcelas asociadas al INTA con más de 4 plantas")
+      }
+    }
+    else{
+      error("No hay parcelas asociadas al INTA")
+    }
+  }
 
 }

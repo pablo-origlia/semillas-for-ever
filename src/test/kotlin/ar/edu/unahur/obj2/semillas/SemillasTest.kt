@@ -8,7 +8,7 @@ import io.kotest.matchers.shouldBe
 class SemillasTest : DescribeSpec ({
     // hay una clase Planta que tiene por atributos
     // anioSemilla, altura
-    describe("Creación de las plantas") {
+    describe("Test de Semillas") {
         val menta = Menta(1.0, 2021)
         val mentita = Menta(0.3,2021)
         val soja = Soja(0.6, 2009)
