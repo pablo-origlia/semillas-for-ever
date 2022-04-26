@@ -63,6 +63,5 @@ class SemillasTest : DescribeSpec ({
             menta.resultaIdeal(parcela).shouldBeFalse()
             sojaEnana.resultaIdeal(parcela).shouldBeTrue()
         }
-
     }
 })

@@ -7,7 +7,7 @@ abstract class Parcela(val ancho: Double, val largo: Double, val horasDeSolPorDi
 
   fun superficie() = ancho * largo
 
-  fun cantidadMaximaDePlantas(): Int{
+  fun cantidadMaximaDePlantas(): Int {
     val cantidad: Int
     if (ancho > largo) {
        cantidad = (superficie() / 5.0).toInt()
@@ -17,7 +17,7 @@ abstract class Parcela(val ancho: Double, val largo: Double, val horasDeSolPorDi
     return cantidad
   }
 
-  fun tieneComplicaciones() = plantacion.any{ p -> p.horasDeSolQueTolera() < horasDeSolPorDia}
+  fun tieneComplicaciones() = plantacion.any{ p -> p.horasDeSolQueTolera() < horasDeSolPorDia }
 
   fun cantidadDePlantas() = plantacion.size
 
@@ -35,9 +35,9 @@ abstract class Parcela(val ancho: Double, val largo: Double, val horasDeSolPorDi
 
   abstract fun puedeAsociarse(planta: Planta): Boolean
 
-  fun cantidadDePlantasBienAsociadas() = plantacion.count{ p -> puedeAsociarse(p)}
+  fun cantidadDePlantasBienAsociadas() = plantacion.count{ p -> puedeAsociarse(p) }
 
-  fun porcentajeDePlantasBienAsociadas() = cantidadDePlantasBienAsociadas().toDouble()/cantidadDePlantas().toDouble()
+  fun porcentajeDePlantasBienAsociadas() = cantidadDePlantasBienAsociadas().toDouble() / cantidadDePlantas().toDouble()
 
 }
 

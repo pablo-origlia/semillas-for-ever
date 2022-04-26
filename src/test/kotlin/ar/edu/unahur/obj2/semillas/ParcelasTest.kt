@@ -11,12 +11,12 @@ class ParcelasTest : DescribeSpec ({
     // hay una clase Parcela que tiene por atributos
     // ancho, largo,horasDeSolPorDia
     describe("Test de Parcelas") {
-        val plantaSoja1 = Soja(anioObtencionSemilla = 2009, altura = 1.5)
-        val plantaSoja2 = Soja(anioObtencionSemilla = 2009, altura = 1.1)
-        val plantaSoja3 = Soja(anioObtencionSemilla = 2021, altura = 1.2)
-        val plantaSoja4 = Soja(anioObtencionSemilla = 2010, altura = 1.8)
-        val plantaPeperina = Peperina(anioObtencionSemilla = 2010, altura = 1.3)
-        val parcela = ParcelaEcologica(ancho = 20.0, largo = 1.0, horasDeSolPorDia = 7)
+        val plantaSoja1 = Soja(1.5, 2009)
+        val plantaSoja2 = Soja(1.1, 2009)
+        val plantaSoja3 = Soja(1.2, 2021)
+        val plantaSoja4 = Soja(1.8, 2010)
+        val plantaPeperina = Peperina(1.3, 2010)
+        val parcela = ParcelaEcologica(20.0, 1.0, 7)
         parcela.plantar(plantaSoja1)
         parcela.plantar(plantaSoja2)
         parcela.plantar(plantaSoja3)
@@ -52,6 +52,5 @@ class ParcelasTest : DescribeSpec ({
         it("Puede asociarse con planta") {
             parcela.puedeAsociarse(plantaPeperina).shouldBeTrue()
         }
-
     }
 })

@@ -13,30 +13,28 @@ object inta {
 
   fun cantidadDeParcelas() = parcelas.size
 
-  fun promedioPlantasPorParcela(): Double{
-    if (cantidadDeParcelas() != 0) {
-      return totalDePlantas().toDouble()/cantidadDeParcelas().toDouble()
+  fun promedioPlantasPorParcela(): Double {
+    if (cantidadDeParcelas() > 0) {
+      return totalDePlantas().toDouble() / cantidadDeParcelas().toDouble()
     }
-    else{
+    else {
       error("No hay parcelas asociadas al INTA")
     }
   }
 
   fun parcelaMasAutosustentable(): Parcela {
-    if (cantidadDeParcelas() !=0){
+    if (cantidadDeParcelas() > 0) {
       val parcelasMayorA4Plantas = parcelas.filter{ p -> p.cantidadDePlantas() > 4 }
-      if (parcelasMayorA4Plantas.isNotEmpty()){
-        val mayorPorcentajeBA= parcelas.maxOf{ p -> p.porcentajeDePlantasBienAsociadas()}
-        return parcelasMayorA4Plantas.filter{ p->p.porcentajeDePlantasBienAsociadas() == mayorPorcentajeBA }.first()
-        //return parcelasMayorA4Plantas.maxOf{p -> p.cantidadDePlantasBienAsociadas().toDouble()/ p.cantidadDePlantas().toDouble()}
+      if (parcelasMayorA4Plantas.isNotEmpty()) {
+        val mayorPorcentajeBA = parcelas.maxOf{ p -> p.porcentajeDePlantasBienAsociadas()}
+        return parcelasMayorA4Plantas.filter{ p -> p.porcentajeDePlantasBienAsociadas() == mayorPorcentajeBA }.first()
       }
-      else{
+      else {
         error("No hay parcelas asociadas al INTA con más de 4 plantas")
       }
     }
-    else{
+    else {
       error("No hay parcelas asociadas al INTA")
     }
   }
-
 }
